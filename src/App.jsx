@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import Navbar from './components/navbar/Navbar';
 import Card from './components/card/Card';
+import {Switch, Route} from "react-router-dom";
+import SideMenu from './components/sidemenu/SideMenu';
 
 function App() {
 
@@ -66,7 +68,40 @@ function App() {
   return (
     <div className="App">
       <Navbar />
+      <SideMenu />
       <header className="App-header">
+
+        <Switch>
+
+          <Route path="/contact">
+            <h1>contact page</h1>
+          </Route>
+
+          <Route path="/about">
+            <h1>about page</h1>
+          </Route>
+
+          <Route path="/blog">
+            <h1>blog page</h1>
+          </Route>
+          
+          <Route path="/">
+          { apiData.map((e)=>{
+          return(
+            <Card 
+        key={e.id}
+        image={`https://picsum.photos/seed/${e.id}/200`} 
+        username={e.username} 
+        name={e.name} 
+        email={e.email}
+        phone={e.phone} 
+        website={e.website} 
+        />
+          )
+        }) }
+          </Route>
+        </Switch>
+
         <Card 
         image="https://picsum.photos/seed/13/200" 
         username="Martinus" 
@@ -90,19 +125,7 @@ function App() {
           )
         }) }
 
-        { apiData.map((e)=>{
-          return(
-            <Card 
-        key={e.id}
-        image={`https://picsum.photos/seed/${e.id}/200`} 
-        username={e.username} 
-        name={e.name} 
-        email={e.email}
-        phone={e.phone} 
-        website={e.website} 
-        />
-          )
-        }) }
+        
       </header>
     </div>
   );
